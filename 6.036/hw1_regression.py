@@ -25,11 +25,10 @@ np.savetxt("wRR_" + str(lambda_input) + ".csv", wRR, delimiter="\n") # write out
 def part2():
     ## Input : Arguments to the function
     ## Return : active, Final list of values to write in the file
-    test_set = dict((i,j) for i,j in \
-                    zip(range(1, X_test.shape[0]),[row for row in X_test]))
-    term1 = lambda_input * np.eye(d) + \
-            (1/sigma2_input) * np.matmul(X_train.T,X_train)
+    test_set = dict((i,j) for i,j in zip(range(1, X_test.shape[0]),[row for row in X_test]))
+    term1 = lambda_input * np.eye(d) + (1/sigma2_input) * np.matmul(X_train.T,X_train)
     E = np.linalg.inv(term1) #dxd
+    X_new = X_train 
     output = []
 
     for i in range(10):
@@ -42,9 +41,8 @@ def part2():
                 sigma_max = sigma_o
                 x_max = x_0
                 idx_max = idx
-        X_new = np.vstack([X_train, x_max])        
-        term1_new = lambda_input * np.eye(d) + \
-                    (1/sigma2_input) * np.matmul(X_new.T, X_new)
+        X_new= np.vstack([X_new, x_max]      
+        term1_new = lambda_input * np.eye(d) + (1/sigma2_input) * np.matmul(X_new.T, X_new)
         E = np.linalg.inv(term1_new)
         output.append(idx_max)
         del test_set[idx_max]    
