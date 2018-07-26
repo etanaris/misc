@@ -73,7 +73,7 @@ print (scores_avg) #averaged_perceptron: [0.9158849280800501, 0.9234521575984991
 ##    else:
 ##        start-=10
 ##        break
-##print ('PER', start,score_per)
+##print ('PERCEPTRON_SCORE', start,score_per)
 
 
     

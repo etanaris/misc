@@ -422,7 +422,7 @@ def perceptron(data, labels, params={}, hook=None):
     T = params.get('T', 600)
     d, n = data.shape
     labels = labels.T
-    theta = (np.array([[0.0]*d])).T
+    theta = np.zeros((d,1))
     theta_o = 0
     for i in range(T):
         for i in range(n):
@@ -446,7 +446,7 @@ def averaged_perceptron(data, labels, params={}, hook =None):
     T = params.get('T', 100)
     d, n = data.shape
     labels = labels.T
-    theta = (np.array([[0.0]*d])).T ; thetas = (np.array([[0.0]*d])).T
+    theta = np.zeros((d,1)) ; thetas = np.zeros((d,1))
     theta_o = 0; theta_os = 0
     for i in range(T):
         for i in range(n):

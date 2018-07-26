@@ -22,15 +22,15 @@ def perceptron(data, start, offset = False):
     theta = (np.array([null])).T
 ##    theta = (np.array([[1000.0, -1000.0]])).T #4)initalization
     theta_o = 0
-##    count_miss = dict()
+    count_miss = dict()
     rounds = 0
     while True:
         for vector,label in data[start:]+data[:start]:
-            rounds+=1
+            rounds +=1
             if misclassified(vector, label, theta, theta_o):
                 #updating rounds of perceptron and misses for each point
-##                misses = count_miss.get(str(vector), 0)
-##                count_miss[str(vector)] = misses + 1
+                misses = count_miss.get(str(vector), 0)
+                count_miss[str(vector)] = misses + 1
                 
                 #updating theta and theta_o
                 theta += (vector*label)
@@ -38,7 +38,7 @@ def perceptron(data, start, offset = False):
                     theta_o += label
         if all(map(lambda entry: not misclassified(entry[0], entry[1], theta, theta_o), data)):
             break  
-    return theta, theta_o,rounds    #,count_miss
+    return theta, theta_o,rounds ,count_miss
 
 #2)SCALING: HOMEWORK 2: TESTING REAL PERCEPTRON BOUND
 
@@ -63,7 +63,7 @@ def perceptron(data, start, offset = False):
 
 ###1.PERCEPTRON MISTAKES
 ##data = [((np.array([[1,-1]])).T ,1),((np.array([[0,1]])).T, -1), \
-##         ((np.array([[-1.5,-1]])).T, 1)]
+##         ((np.array([[-10,-1]])).T, 1)]
 ##print (perceptron(data, 0))
 ###start 0
 ##print (perceptron(data, 0))
