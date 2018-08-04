@@ -56,13 +56,27 @@ def sgd(X, y, JdJ, w0, step_size_fn, max_iter):
     d, n = X.shape
     count = 0
     while (count < max_iter):
-        idx = np.random.ranint(n)
+        idx = np.random.randint(n)
         pt_x = X[:,[idx]]; label_x = y[idx]
         f, df = JdJ(pt_x, label_x) #df is a col vector
         fs.append(f); ws.append(w)
         w -= step_size_fn(count)*df
     return w, fs, ws #w[th'th0]
 
+
+#scaling the learning rate by the ratio of the current gradient to the gradients
+#you've seen so far to make regular sgd converge much faster
+def adagrad(X, y, JdJ, wo, step_size_fn, max_iter):
+    w = w0; fs = []; ws = []; dfs = []
+    d, n = X.shape
+    count = 0
+    while (count < max_iter):
+        idx  = np.random.randint(n)
+        pt_x = X[:,[idx]]; label_x = y[idx]
+        f, df = Jdj(pt_x, label_x)
+        fs.append(f); ws.append(w); dfs.append(df)
+        w-= step_size_fn(count) * (df/np.sqrt(sum([grad**2 for grad in dfs]))
+    return w, fs, ws
 
 ##5)Pegasos: stochastic gradient descent on the svm objective
 def JdJ_lam(lam):
@@ -80,8 +94,6 @@ def JdJ_lam(lam):
         return f, df
     return JDJ
         
-        
-
 def Pegasos(data, labels, lam, max_iter):
     d, n = data.shape
     JdJ = JdJ_lam(lam)
